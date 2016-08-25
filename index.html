@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html >
+<!-- save to: KP/html_view -->
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	<meta charset="utf-8">
+	<title>Pre-Call Plan</title>
+
+	<script type="text/javascript" src="jquery.min.js"></script>
+	<script type="text/javascript" src="bootstrap.min.js"></script>
+	<script type="text/javascript" src="rr_eform.js"></script>
+	<script type="text/javascript" src="index.js"></script>
+	<script type="text/javascript" src="awesomplete.js"></script>
+	<script type="text/javascript" src="app.js"></script>
+
+	<link rel="stylesheet" href="bootstrap.min.css">
+	<link rel="stylesheet" href="awesomplete.css">
+	<link rel="stylesheet" href="app.css">
+
+</head>
+<body>
+	<div class="container">
+		<div id="alert"></div>
+		<form action="" id="form1" role="form">
+			<table id="myTable" width="100%">
+				<tr><td class="cell"></td><td class="cell"></td><td class="cell"></td><td class="cell"></td><td class="cell"></td><td class="cell"></td><td class="cell"></td><td class="cell"></td><td class="cell"></td><td class="cell"></td><td class="cell"></td><td class="cell"></td></tr>
+				<tr>
+					<td colspan=1>
+						<label for="itinerary_date" class='control-label'>Date:</label>
+					</td>
+					<td colspan=5>
+						<input type=text id="itinerary_date" class="form-control" name="itinerary_date" readonly>
+					</td>
+				</tr>
+
+				<tr>
+					<td colspan=1>
+						<label for="territory_id" class='control-label'>Area:</label>
+					</td>
+					<td colspan=5>
+						<input type=text id="territory_id" name="territory_id" class="form-control" readonly>
+					</td>
+				</tr>
+
+				<tr>
+					<td colspan=8><br><h4><label class='control-label'>PRODUCT 1</label><h4><hr></td>
+					<td colspan=4>
+						<div class="btn-group" data-toggle="buttons" style="width:100%" >
+							<label style="width:33%;"class="btn btn-primary" id="prev" onclick="prevMonth()">Prev</label>
+							<label style="width:34%;"class="btn btn-primary" id="current" onclick="currentMonth()">Curr</label>
+							<label style="width:33%;"class="btn btn-primary" id="next" onclick="nextMonth()">Next</label>
+						</div>
+					</td>
+				</tr>
+
+				<tr>
+					<td colspan=8>
+						<label for="pre_product_1" class='control-label'>Product:</label>
+						<input type=text id="awp_pre_product_1" class="form-control">
+						<input type=hidden id="pre_product_1" name="pre_product_1" />
+					</td>
+					<td colspan=4>
+						<label for="pre_activity_1" class='control-label'>Promotional Activity:</label>
+						<select name="pre_activity_1" id="pre_activity_1" class="form-control" multiple> </select>
+						<ul id="pre_activity_1_list"></ul>
+					</td>
+				</tr>
+
+				<tr>
+					<td colspan=8>
+						<label for="pre_goal" class='control-label'>Goal:</label>
+						<textarea id="pre_goal" name="pre_goal" rows="2" class="form-control" onfocusout="cleanString(this)"></textarea>
+					</td>
+					<td colspan=4>
+						<label for="pre_tool_1" class='control-label'>Promotional Tool:</label>
+						<select name="pre_tool_1" id="pre_tool_1" class="form-control" multiple> </select>
+						<ul id="pre_tool_1_list"></ul>
+					</td>
+				</tr>
+
+				<tr>
+					<td colspan=12><h4><br><label class='control-label'>PRODUCT 2</label><h4><hr></td>
+				</tr>
+
+				<tr>
+					<td colspan=8>
+						<label for="pre_product_2" class='control-label'>Product:</label>
+						<input type=hidden id="pre_product_2" name="pre_product_2" />
+						<input id="awp_pre_product_2" class="form-control" />
+					</td>
+					<td colspan=4>
+						<label for="pre_activity_2" class='control-label'>Promotional Activity:</label>
+						<select name="pre_activity_2" id="pre_activity_2" multiple class="form-control" > </select>
+						<ul id="pre_activity_2_list"></ul>
+					</td>
+				</tr>	
+
+				<tr>
+					<td colspan=8>
+						<label for="general_activities" class='control-label'>General Activities:</label>
+						<textarea id="general_activities" name="general_activities" rows="4" class="form-control" onfocusout="cleanString(this)"></textarea>
+					</td>
+					<td colspan=4>
+						<label for="pre_tool_2" class='control-label'>Promotional Tool:</label>
+						<select name="pre_tool_2" id="pre_tool_2" class="form-control" multiple> </select>
+						<ul id="pre_tool_2_list"></ul>
+					</td>
+				</tr>	
+				<tr><td colspan=12>&nbsp;</td></tr>
+				<tr>
+					<td colspan=2><button type="buttton" id="reset" class="btn btn-default form-control" onclick="resetForm()">Reset</button></td>
+					<td colspan=2><button type="button" id="submit" class="btn btn-primary form-control" onclick="submitForm()">Submit</button></td>
+					<td colspan=4>&nbsp;</td>
+					<td colspan=2><button type="button" id="copy" class="btn btn-primary form-control" onclick="copyNotes()">Copy</button></td>
+					<td colspan=2><button type="button" id="paste" class="btn btn-primary form-control" onclick="pasteNotes()">Paste</button></td>
+				</tr>
+				<tr><td colspan=12><hr></td><tr>
+					<tr>
+						<td id="version" colspan=12 style="text-align:right"></td>
+					</tr>
+					<tr><td colspan=12>&nbsp;</td></tr>
+				</table>
+				<div id="hidden_fields">
+					<h4>For Developers Only</h4>
+					<hr>
+					md_id<input type=text name="md_id" id="md_id" class="form-control">
+					md_name<input type=text name="md_name" id="md_name" class="form-control">
+					psr_id<input type=text name="psr_id" id="psr_id" class="form-control">
+					userid<input type=text name="userid" id="userid" class="form-control">
+					visit_number<input type=text name="visit_number" id="visit_number" class="form-control" value="5">
+					frequency<input type=text name="frequency" id="frequency" class="form-control">
+					selected_month<input type=text name="selected_month" id="selected_month" class="form-control">
+					unplanned<input type=text name="unplanned" id="unplanned" class="form-control" value="no">
+					NEWCALL<input type=text id="NEWCALL" class="form-control" value="NO">
+					submitted<input type=text name="submitted" id="submitted" class="form-control" value="no">
+
+					pre_call<textarea type=text name="pre_call" id="pre_call" class="form-control" rows="2"></textarea>
+					current_month<input type=text id="current_month" class="form-control">
+					has_pre_call<input type=text id="has_pre_call" class="form-control" value="no">
+				</div>
+			</form>
+		</div>
+	</div>
+</body>
+</html>
