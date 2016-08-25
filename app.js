@@ -1,10 +1,14 @@
 $(document).ready(function() {
-	$("#version").html("Version 2.0");
+	$("#version").html("<hr>Version 2.0");
 	populateProducts();
+
+	developerMode(false);
 });
 
 $(window).load(function(){
 	activateCopyOnChange();
+
+
 });
 
 function setInitialData(obj) {
@@ -26,20 +30,7 @@ function setInitialData(obj) {
 	if(getPsr().psr_udf1 != ""){
 		$("#paste").show();
 	}
-
-	//if has post_call
-	if($("#submitted").val() == "yes"){
-		$("#paste").hide();
-		$("#copy").hide();
-		$("#submit").hide();
-		$("#reset").hide();
-		$("input").prop("readonly", true);
-		$("textarea").prop("readonly", true);
-		$("select").attr("disabled", true); 
-
-		promotionalActivityTool();
-	}
-
+	
 	//if NEWCALL
 	if($("#NEWCALL").val() == "YES"){
 		$("#visit_number").val("5");
@@ -55,10 +46,18 @@ function setInitialData(obj) {
 		});	
 	}
 
-	// //if has_pre_call
-	// if(obj.pre_call != "") {
-	// 	$("#has_pre_call").val("yes");
-	// }
+	//if has post_call
+	if($("#submitted").val() == "yes"){
+		$("#paste").hide();
+		$("#copy").hide();
+		$("#submit").hide();
+		$("#reset").hide();
+		$("input").prop("readonly", true);
+		$("textarea").prop("readonly", true);
+		$("select").attr("disabled", true); 
+
+		promotionalActivityTool();
+	}
 
 	if(!jQuery.isEmptyObject(preCallObject())){
 		$("#has_pre_call").val("yes");
@@ -226,32 +225,46 @@ function preCallObject(){
 }
 
 function promotionalActivityTool(){
-	$(".btn-group").hide();
+	var obj = itinerary;
+	$("#btn-group").hide();
+
 	$("#pre_activity_1").hide();
 	var a = ""+obj.pre_activity_1;		
 	$.each(a.split(","), function(i,e){
-		var list = '<li>'+e+'</li>';
+		if(e+"" != "undefined")
+			var list = '<li>'+e+'</li>';
+		else
+			var list = '<li>None</li>';
 		$("#pre_activity_1_list").append(list);
 	});
 
 	$("#pre_activity_2").hide();
 	var b = ""+obj.pre_activity_2;		
 	$.each(b.split(","), function(i,e){
-		var list = '<li>'+e+'</li>';
+		if(e+"" != "undefined")
+			var list = '<li>'+e+'</li>';
+		else
+			var list = '<li>None</li>';
 		$("#pre_activity_2_list").append(list);
 	});
 
 	$("#pre_tool_1").hide();
 	var c = ""+obj.pre_tool_1;		
 	$.each(c.split(","), function(i,e){
-		var list = '<li>'+e+'</li>';
+		if(e+"" != "undefined")
+			var list = '<li>'+e+'</li>';
+		else
+			var list = '<li>None</li>';
 		$("#pre_tool_1_list").append(list);
 	});
 
 	$("#pre_tool_2").hide();
 	var d = ""+obj.pre_tool_2;		
 	$.each(d.split(","), function(i,e){
-		var list = '<li>'+e+'</li>';
+		if(e+"" != "undefined")
+			var list = '<li>'+e+'</li>';
+		else
+			var list = '<li>None</li>';
 		$("#pre_tool_2_list").append(list);
 	});
 }
@@ -321,44 +334,55 @@ function submitForm(){
 
 	var call_notes2Sql = "insert into call_notes2 values('"+ json.psr_id +"', '"+ json.md_id +"', CURRENT_TIMESTAMP, '"+call_notes2_string+"', '"+ json.territory_id +"', '"+ json.userid +"')";
 
-	//execSQL(call_notes2Sql);
 
 	var call_notes_string = "PRE-CALL::%0AProduct1:: "+json.pre_product_1+"%0AProduct2:: "+json.pre_product_2+"%0AActivity 1:: "+json.pre_activity_1+"%0AActivity 2:: "+json.pre_activity_2+"%0ATool 1:: "+json.pre_tool_1+"%0ATool 2:: "+json.pre_tool_2+"%0AGoal:: "+json.pre_goal+"%0AGeneral Activities:: "+json.general_activities;
 	
 	call_notesSql = "insert into call_notes values('"+ json.psr_id +"', '"+ json.md_id +"', getDate(), '"+call_notes_string+"', '"+ json.territory_id +"')";
 	
-	// execSQL(call_notes2Sql);
-	// postSQL("MSSQL",call_notesSql);
+	execSQL(call_notes2Sql);
+	postSQL("MSSQL",call_notesSql);
 
 	// showAlert(ittpSql+"<hr>"+itSql+"<hr>"+local);
 
-	 postSQL("MSSQL",itppSql);
-	 postSQL("MSSQL",itSql);
-	 execSQL(local);
+	postSQL("MSSQL",itppSql);
+	postSQL("MSSQL",itSql);
+	execSQL(local);
 
-	 console.log(itppSql);
-	 console.log(itSql);
+	console.log(itppSql);
+	console.log(itSql);
 
-	 showMessage("alert-success", "Pre-Call Submitted successfully.");
-	 return false;
+	showMessage("alert-success", "Pre-Call Submitted successfully.");
+	return false;
+}
+
+function activateCopyOnChange(){
+	$("form").keyup(function(){
+		preCallButtonActivate();
+	});
+	$("form").change(function(){
+		preCallButtonActivate();
+	});
+}
+
+function preCallButtonActivate(){
+	if(!jQuery.isEmptyObject(preCallObject())){
+		$("#copy").show();
+		$("#submit").show();
+	} else{
+		$("#copy").hide();
+		$("#submit").hide();
 	}
+}
 
-	function activateCopyOnChange(){
-		$("form").keyup(function(){
-			preCallButtonActivate();
-		});
+function developerMode(flag){
+	if(flag){
+		$("#hidden_fields").show();
+		var currentVersion = $("#version").html();
+		$("#version").html('<hr>'+currentVersion + ' - developerMode is On');
+	} else{
+		$("#hidden_fields").hide();
 	}
-
-	function preCallButtonActivate(){
-		if(!jQuery.isEmptyObject(preCallObject())){
-			$("#copy").show();
-			$("#submit").show();
-		} else{
-			$("#copy").hide();
-			$("#submit").hide();
-		}
-	}
-
+}
 
 /**
 * variables

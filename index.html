@@ -41,10 +41,11 @@
 						<input type=text id="territory_id" name="territory_id" class="form-control" readonly>
 					</td>
 				</tr>
-
+				
 				<tr>
-					<td colspan=8><br><h4><label class='control-label'>PRODUCT 1</label><h4><hr></td>
-					<td colspan=4>
+					<td colspan=6><br><h4><label class='control-label'>PRODUCT 1</label><h4><hr></td>
+					<td colspan=6 id="btn-group">
+						<br>
 						<div class="btn-group" data-toggle="buttons" style="width:100%" >
 							<label style="width:33%;"class="btn btn-primary" id="prev" onclick="prevMonth()">Prev</label>
 							<label style="width:34%;"class="btn btn-primary" id="current" onclick="currentMonth()">Curr</label>
@@ -54,27 +55,20 @@
 				</tr>
 
 				<tr>
-					<td colspan=8>
+					<td colspan=6>
 						<label for="pre_product_1" class='control-label'>Product:</label>
 						<input type=text id="awp_pre_product_1" class="form-control">
 						<input type=hidden id="pre_product_1" name="pre_product_1" />
-					</td>
-					<td colspan=4>
-						<label for="pre_activity_1" class='control-label'>Promotional Activity:</label>
-						<select name="pre_activity_1" id="pre_activity_1" class="form-control" multiple> </select>
-						<ul id="pre_activity_1_list"></ul>
-					</td>
-				</tr>
-
-				<tr>
-					<td colspan=8>
 						<label for="pre_goal" class='control-label'>Goal:</label>
 						<textarea id="pre_goal" name="pre_goal" rows="2" class="form-control" onfocusout="cleanString(this)"></textarea>
 					</td>
-					<td colspan=4>
+					<td colspan=6>
+						<label for="pre_activity_1" class='control-label'>Promotional Activity:</label>
+						<select name="pre_activity_1" id="pre_activity_1" class="form-control" multiple> </select>
+						<ol id="pre_activity_1_list"></ol>
 						<label for="pre_tool_1" class='control-label'>Promotional Tool:</label>
 						<select name="pre_tool_1" id="pre_tool_1" class="form-control" multiple> </select>
-						<ul id="pre_tool_1_list"></ul>
+						<ol id="pre_tool_1_list"></ol>
 					</td>
 				</tr>
 
@@ -83,29 +77,23 @@
 				</tr>
 
 				<tr>
-					<td colspan=8>
+					<td colspan=6>
 						<label for="pre_product_2" class='control-label'>Product:</label>
 						<input type=hidden id="pre_product_2" name="pre_product_2" />
 						<input id="awp_pre_product_2" class="form-control" />
-					</td>
-					<td colspan=4>
-						<label for="pre_activity_2" class='control-label'>Promotional Activity:</label>
-						<select name="pre_activity_2" id="pre_activity_2" multiple class="form-control" > </select>
-						<ul id="pre_activity_2_list"></ul>
-					</td>
-				</tr>	
-
-				<tr>
-					<td colspan=8>
 						<label for="general_activities" class='control-label'>General Activities:</label>
 						<textarea id="general_activities" name="general_activities" rows="4" class="form-control" onfocusout="cleanString(this)"></textarea>
 					</td>
-					<td colspan=4>
+					<td colspan=6>
+						<label for="pre_activity_2" class='control-label'>Promotional Activity:</label>
+						<select name="pre_activity_2" id="pre_activity_2" multiple class="form-control" > </select>
+						<ol id="pre_activity_2_list"></ol>
 						<label for="pre_tool_2" class='control-label'>Promotional Tool:</label>
 						<select name="pre_tool_2" id="pre_tool_2" class="form-control" multiple> </select>
-						<ul id="pre_tool_2_list"></ul>
+						<ol id="pre_tool_2_list"></ol>
 					</td>
 				</tr>	
+
 				<tr><td colspan=12>&nbsp;</td></tr>
 				<tr>
 					<td colspan=2><button type="buttton" id="reset" class="btn btn-default form-control" onclick="resetForm()">Reset</button></td>

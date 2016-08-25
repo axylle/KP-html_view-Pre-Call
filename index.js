@@ -203,6 +203,6 @@ function getUpdateString(jsonObj){
 	return updateString;
 }
 
-var months = ["---", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+var months = ["---", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "July", "August", "September", "Oct", "Nov", "Dec"];
 var itinerary = {};
 

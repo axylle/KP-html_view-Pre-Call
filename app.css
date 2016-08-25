@@ -4,11 +4,9 @@
 }
 
 td{
-  border-left: 10px solid white;
-  border-right: 10px solid white;
-  border-top: 1px solid white;
-  border-bottom: 1px solid white;
   vertical-align: text-top;
+  padding: 0px 5px 0px 5px;
+  margin: 0px 0px;
 }
 
 .cell{
@@ -24,10 +22,6 @@ label{
 	font-size: 100%;
 }
 
-hr{
+hr, h4{
 	margin: 0px 0px;	
-}
-
-#hidden_fields{
-  display: none;
 }
